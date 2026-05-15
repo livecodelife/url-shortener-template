@@ -1,0 +1,32 @@
+service:
+  name: identity
+  service_dir: ..
+  build_context: ..
+  type: web
+  framework: chi
+  port: 8080
+  health_endpoint: /health
+  start_command: /identity
+  warmup_endpoint: /health
+  warmup_delay_ms: 500
+  environment:
+    DB_HOST: db
+    DB_PORT: "5432"
+    DB_USER: identity
+    DB_PASSWORD: identity
+    DB_NAME: identity
+
+infrastructure:
+  database: true
+
+database:
+  name: db
+  type: postgresql
+  image: postgres:16-alpine
+  port: 5432
+  container: db
+  host: db
+  database: identity
+  username: identity
+  password: identity
+  init_script: ../init.sql

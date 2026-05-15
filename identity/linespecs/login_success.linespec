@@ -1,0 +1,30 @@
+TEST Identity - login with valid credentials returns token
+
+VARS
+  EMAIL: string length=20 charset=alphanumeric
+  PASSWORD: enum values=testpassword123
+  USER_ID: string length=32 charset=alphanumeric
+
+RECEIVE HTTP:POST /auth/login
+WITH {{payloads/login_request.json}}
+HEADERS
+  Content-Type: application/json
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [users]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  email: ${EMAIL}
+RETURNS {{payloads/user_row.yaml}}
+
+EXPECT WRITE:POSTGRESQL
+ACCESSING_TABLES [tokens]
+VERIFY_OPERATION INSERT
+VERIFY_WRITTEN_VALUES
+  user_id: ${USER_ID}
+WITH {{payloads/write_result.yaml}}
+
+RESPOND HTTP:200
+WITH {{payloads/login_response.json}}
+NOISE
+  body.token

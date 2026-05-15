@@ -1,0 +1,30 @@
+TEST Identity - register new user returns 201 with user object
+
+VARS
+  EMAIL: string length=20 charset=alphanumeric
+  PASSWORD: string length=16 charset=alphanumeric
+  USER_ID: string length=32 charset=alphanumeric
+
+RECEIVE HTTP:POST /auth/register
+WITH {{payloads/register_request.json}}
+HEADERS
+  Content-Type: application/json
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [users]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  email: ${EMAIL}
+RETURNS EMPTY
+
+EXPECT WRITE:POSTGRESQL
+ACCESSING_TABLES [users]
+VERIFY_OPERATION INSERT
+VERIFY_WRITTEN_VALUES
+  email: ${EMAIL}
+WITH {{payloads/write_result.yaml}}
+
+RESPOND HTTP:201
+WITH {{payloads/register_response.json}}
+NOISE
+  body.id

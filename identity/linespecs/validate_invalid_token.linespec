@@ -1,0 +1,17 @@
+TEST Identity - validate invalid bearer token returns 401
+
+VARS
+  AUTH_TOKEN: string length=64 charset=alphanumeric
+
+RECEIVE HTTP:GET /validate
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [tokens]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  token: ${AUTH_TOKEN}
+RETURNS EMPTY
+
+RESPOND HTTP:401

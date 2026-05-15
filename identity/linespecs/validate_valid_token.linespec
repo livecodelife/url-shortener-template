@@ -1,0 +1,19 @@
+TEST Identity - validate valid bearer token returns user_id
+
+VARS
+  AUTH_TOKEN: string length=64 charset=alphanumeric
+  USER_ID: string length=32 charset=alphanumeric
+
+RECEIVE HTTP:GET /validate
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [tokens]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  token: ${AUTH_TOKEN}
+RETURNS {{payloads/token_row.yaml}}
+
+RESPOND HTTP:200
+WITH {{payloads/validate_response.json}}

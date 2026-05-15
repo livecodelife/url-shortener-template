@@ -1,0 +1,22 @@
+TEST Identity - register with duplicate email returns 409
+
+VARS
+  EMAIL: string length=20 charset=alphanumeric
+  PASSWORD: string length=16 charset=alphanumeric
+  USER_ID: string length=32 charset=alphanumeric
+
+RECEIVE HTTP:POST /auth/register
+WITH {{payloads/register_request.json}}
+HEADERS
+  Content-Type: application/json
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [users]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  email: ${EMAIL}
+RETURNS {{payloads/user_id_row.yaml}}
+
+EXPECT_NOT WRITE:POSTGRESQL users
+
+RESPOND HTTP:409
