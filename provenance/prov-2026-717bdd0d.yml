@@ -1,6 +1,6 @@
 id: prov-2026-717bdd0d
 title: Identity Service Token Validation
-status: open
+status: implemented
 created_at: "2026-05-15"
 author: calebcowen@gmail.com
 intent: >
@@ -22,7 +22,7 @@ implements: prov-2026-eff2677a
 supersedes: ""
 superseded_by: ""
 related: []
-sealed_at_sha: ""
+sealed_at_sha: d8d55458dcd293f9f242d1fa1c90a76edb438d3e
 associated_specs:
   - path: linespecs/url-shortener/create_link_unauthenticated.linespec
     type: linespec
