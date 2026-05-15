@@ -1,0 +1,20 @@
+id: prov-2026-acbdd29f
+title: DeleteLink uses ON DELETE CASCADE instead of explicit transaction
+status: implemented
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: "DeleteLink executes a single DELETE FROM links, relying on the schema's ON DELETE CASCADE constraint to remove associated clicks atomically at the database level. The original Go-side transaction (BEGIN/DELETE clicks/DELETE links/COMMIT) caused lib/pq to return 'unexpected transaction status idle' because the linespec proxy sends ReadyForQuery with status 'I' (idle) after intercepting statements inside a transaction, violating lib/pq's transaction state expectations."
+constraints: []
+affected_scope:
+  - service/db/links.go
+forbidden_scope: []
+type: imprint
+implements: prov-2026-35a431d0
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: 320270401dcfbbd1ad1197dc31eed117285fc8be
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

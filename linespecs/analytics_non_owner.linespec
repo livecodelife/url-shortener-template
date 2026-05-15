@@ -5,13 +5,13 @@ VARS
   USER_ID: string length=16 charset=alphanumeric
   OTHER_USER_ID: string length=16 charset=alphanumeric
   SLUG: string length=8 charset=alphanumeric
-  DESTINATION: string length=32 charset=alphanumeric
+  DESTINATION: string pattern=https://example.com/[a-z0-9]{16}
 
 RECEIVE HTTP:GET /links/${SLUG}/analytics
 HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
 
-EXPECT HTTP:GET http://identity-service.local/validate
+EXPECT HTTP:GET http://identity-service/validate
 HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
 RETURNS {{payloads/identity_valid.json}}

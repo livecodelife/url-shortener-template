@@ -2,7 +2,7 @@ TEST Create link - no bearer token returns 401 without touching the database
 
 VARS
   SLUG: string length=8 charset=alphanumeric
-  DESTINATION: string length=32 charset=alphanumeric
+  DESTINATION: string pattern=https://example.com/[a-z0-9]{16}
 
 RECEIVE HTTP:POST /links
 WITH {{payloads/create_link_request.json}}

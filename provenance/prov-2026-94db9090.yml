@@ -1,0 +1,20 @@
+id: prov-2026-94db9090
+title: GetLink scans nullable types for proxy dummy NULL row compatibility
+status: implemented
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: "GetLink scans into sql.NullString and sql.NullTime instead of string and time.Time directly. The linespec proxy sends a dummy NULL row (not sql.ErrNoRows) for RETURNS EMPTY expectations. Scanning NULL into non-nullable types causes a scan error propagating as 500 instead of 404. Using nullable scan targets and checking slugVal.Valid == false as the not-found condition handles both production ErrNoRows and the proxy dummy NULL row."
+constraints: []
+affected_scope:
+  - service/db/links.go
+forbidden_scope: []
+type: imprint
+implements: prov-2026-35a431d0
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: 320270401dcfbbd1ad1197dc31eed117285fc8be
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

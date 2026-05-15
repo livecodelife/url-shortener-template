@@ -1,0 +1,20 @@
+id: prov-2026-1187eb2c
+title: SlugExists via SELECT slug LIMIT 1 to avoid binary int8 encoding
+status: implemented
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: "SlugExists queries SELECT slug FROM links WHERE slug = $1 LIMIT 1 instead of SELECT COUNT(*). lib/pq requests binary format (int8, 8 bytes) for COUNT(*) results via prepared statements, but the linespec proxy returns YAML string values (1 byte). Using a slug column (varchar/text) forces text format so the proxy's string values decode correctly. The result is scanned into sql.NullString to handle the proxy's dummy NULL row for RETURNS EMPTY without a scan error."
+constraints: []
+affected_scope:
+  - service/db/links.go
+forbidden_scope: []
+type: imprint
+implements: prov-2026-35a431d0
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: 320270401dcfbbd1ad1197dc31eed117285fc8be
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

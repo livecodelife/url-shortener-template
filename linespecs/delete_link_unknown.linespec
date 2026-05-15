@@ -9,7 +9,7 @@ RECEIVE HTTP:DELETE /links/${SLUG}
 HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
 
-EXPECT HTTP:GET http://identity-service.local/validate
+EXPECT HTTP:GET http://identity-service/validate
 HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
 RETURNS {{payloads/identity_valid.json}}

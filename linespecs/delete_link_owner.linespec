@@ -4,13 +4,13 @@ VARS
   AUTH_TOKEN: string length=32 charset=alphanumeric
   USER_ID: string length=16 charset=alphanumeric
   SLUG: string length=8 charset=alphanumeric
-  DESTINATION: string length=32 charset=alphanumeric
+  DESTINATION: string pattern=https://example.com/[a-z0-9]{16}
 
 RECEIVE HTTP:DELETE /links/${SLUG}
 HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
 
-EXPECT HTTP:GET http://identity-service.local/validate
+EXPECT HTTP:GET http://identity-service/validate
 HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
 RETURNS {{payloads/identity_valid.json}}
@@ -21,11 +21,6 @@ VERIFY_OPERATION SELECT
 VERIFY_WHERE
   slug: ${SLUG}
 RETURNS {{payloads/link_row.yaml}}
-
-EXPECT WRITE:POSTGRESQL
-ACCESSING_TABLES [clicks]
-VERIFY_OPERATION DELETE
-WITH {{payloads/write_result.yaml}}
 
 EXPECT WRITE:POSTGRESQL
 ACCESSING_TABLES [links]

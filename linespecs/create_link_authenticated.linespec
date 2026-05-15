@@ -4,7 +4,7 @@ VARS
   AUTH_TOKEN: string length=32 charset=alphanumeric
   USER_ID: string length=16 charset=alphanumeric
   SLUG: string length=8 charset=alphanumeric
-  DESTINATION: string length=32 charset=alphanumeric
+  DESTINATION: string pattern=https://example.com/[a-z0-9]{16}
 
 RECEIVE HTTP:POST /links
 WITH {{payloads/create_link_request.json}}
@@ -12,15 +12,17 @@ HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
   Content-Type: application/json
 
-EXPECT HTTP:GET http://identity-service.local/validate
+EXPECT HTTP:GET http://identity-service/validate
 HEADERS
   Authorization: Bearer ${AUTH_TOKEN}
 RETURNS {{payloads/identity_valid.json}}
 
 EXPECT READ:POSTGRESQL CALL 1
 ACCESSING_TABLES [links]
-VERIFY_WHERE_COLUMNS [slug]
-RETURNS {{payloads/count_zero.yaml}}
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  slug: ${SLUG}
+RETURNS EMPTY
 
 EXPECT WRITE:POSTGRESQL
 ACCESSING_TABLES [links]

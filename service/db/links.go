@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	"errors"
+	"time"
 
 	"github.com/provenance-templates/url-shortener/models"
 )
@@ -11,21 +12,42 @@ var ErrNotFound = errors.New("not found")
 var ErrSlugConflict = errors.New("slug conflict")
 
 func GetLink(db *sql.DB, slug string) (*models.Link, error) {
-	link := &models.Link{}
+	var (
+		slugVal, destVal, createdBy sql.NullString
+		createdAt                   sql.NullTime
+	)
 	err := db.QueryRow(
 		`SELECT slug, destination, created_at, created_by FROM links WHERE slug = $1`,
 		slug,
-	).Scan(&link.Slug, &link.Destination, &link.CreatedAt, &link.CreatedBy)
-	if errors.Is(err, sql.ErrNoRows) {
+	).Scan(&slugVal, &destVal, &createdAt, &createdBy)
+	if errors.Is(err, sql.ErrNoRows) || (err == nil && !slugVal.Valid) {
 		return nil, ErrNotFound
 	}
-	return link, err
+	if err != nil {
+		return nil, err
+	}
+	t := time.Time{}
+	if createdAt.Valid {
+		t = createdAt.Time
+	}
+	return &models.Link{
+		Slug:        slugVal.String,
+		Destination: destVal.String,
+		CreatedAt:   t,
+		CreatedBy:   createdBy.String,
+	}, nil
 }
 
 func SlugExists(db *sql.DB, slug string) (bool, error) {
-	var count int
-	err := db.QueryRow(`SELECT COUNT(*) FROM links WHERE slug = $1`, slug).Scan(&count)
-	return count > 0, err
+	var s sql.NullString
+	err := db.QueryRow(`SELECT slug FROM links WHERE slug = $1 LIMIT 1`, slug).Scan(&s)
+	if errors.Is(err, sql.ErrNoRows) {
+		return false, nil
+	}
+	if err != nil {
+		return false, err
+	}
+	return s.Valid, nil
 }
 
 func CreateLink(db *sql.DB, link *models.Link) error {
@@ -44,23 +66,8 @@ func CreateLink(db *sql.DB, link *models.Link) error {
 }
 
 func DeleteLink(db *sql.DB, slug string) error {
-	tx, err := db.Begin()
-	if err != nil {
-		return err
-	}
-	defer tx.Rollback()
-
-	_, err = tx.Exec(`DELETE FROM clicks WHERE slug = $1`, slug)
-	if err != nil {
-		return err
-	}
-
-	_, err = tx.Exec(`DELETE FROM links WHERE slug = $1`, slug)
-	if err != nil {
-		return err
-	}
-
-	return tx.Commit()
+	_, err := db.Exec(`DELETE FROM links WHERE slug = $1`, slug)
+	return err
 }
 
 func ListLinksByUser(db *sql.DB, userID string) ([]models.Link, error) {

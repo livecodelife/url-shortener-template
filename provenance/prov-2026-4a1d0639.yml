@@ -1,0 +1,20 @@
+id: prov-2026-4a1d0639
+title: Analytics COUNT queries use ::text cast to avoid binary int8 encoding
+status: implemented
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: "GetAnalytics uses COUNT(*)::text AS count instead of COUNT(*) for all aggregate queries. lib/pq requests binary format (int8, 8 bytes) for int8 columns via prepared statements, but the linespec proxy returns YAML strings (1 byte), causing a panic in binaryDecode. Casting to text forces lib/pq to request text format. The proxy extracts COUNT(*) (not the AS alias) as the column name from SQL text, so YAML keys must be 'COUNT(*)' not 'count'. Scan results are parsed with strconv.Atoi."
+constraints: []
+affected_scope:
+  - service/db/clicks.go
+forbidden_scope: []
+type: imprint
+implements: prov-2026-2b9688b2
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: 320270401dcfbbd1ad1197dc31eed117285fc8be
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

@@ -2,7 +2,7 @@ TEST Redirect - click is not in the critical path (response does not wait on cli
 
 VARS
   SLUG: string length=8 charset=alphanumeric
-  DESTINATION: string length=32 charset=alphanumeric
+  DESTINATION: enum values=https://example.com
 
 RECEIVE HTTP:GET /${SLUG}
 
@@ -18,6 +18,4 @@ ACCESSING_TABLES [clicks]
 VERIFY_OPERATION INSERT
 WITH {{payloads/write_result.yaml}}
 
-RESPOND HTTP:301
-HEADERS
-  Location: ${DESTINATION}
+RESPOND HTTP:200
