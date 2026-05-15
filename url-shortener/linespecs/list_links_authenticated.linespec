@@ -1,0 +1,28 @@
+TEST List links - authenticated user receives only their own links
+
+VARS
+  AUTH_TOKEN: string length=32 charset=alphanumeric
+  USER_ID: string length=16 charset=alphanumeric
+  SLUG: string length=8 charset=alphanumeric
+  DESTINATION: string pattern=https://example.com/[a-z0-9]{16}
+
+RECEIVE HTTP:GET /links
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+
+EXPECT HTTP:GET http://identity-service/validate
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+RETURNS {{payloads/identity_valid.json}}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  created_by: ${USER_ID}
+RETURNS {{payloads/links_list.yaml}}
+
+RESPOND HTTP:200
+WITH {{payloads/list_response.json}}
+NOISE
+  body[0].created_at

@@ -1,0 +1,21 @@
+TEST Redirect - click is not in the critical path (response does not wait on click write)
+
+VARS
+  SLUG: string length=8 charset=alphanumeric
+  DESTINATION: enum values=https://example.com
+
+RECEIVE HTTP:GET /${SLUG}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  slug: ${SLUG}
+RETURNS {{payloads/link_row.yaml}}
+
+EXPECT WRITE:POSTGRESQL
+ACCESSING_TABLES [clicks]
+VERIFY_OPERATION INSERT
+WITH {{payloads/write_result.yaml}}
+
+RESPOND HTTP:200

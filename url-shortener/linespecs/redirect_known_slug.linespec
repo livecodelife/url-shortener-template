@@ -1,0 +1,16 @@
+TEST Redirect - known slug returns 301 with Location header
+
+VARS
+  SLUG: string length=8 charset=alphanumeric
+  DESTINATION: enum values=https://example.com
+
+RECEIVE HTTP:GET /${SLUG}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  slug: ${SLUG}
+RETURNS {{payloads/link_row.yaml}}
+
+RESPOND HTTP:200

@@ -1,0 +1,27 @@
+TEST Delete link - unknown slug returns 404
+
+VARS
+  AUTH_TOKEN: string length=32 charset=alphanumeric
+  USER_ID: string length=16 charset=alphanumeric
+  SLUG: string length=8 charset=alphanumeric
+
+RECEIVE HTTP:DELETE /links/${SLUG}
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+
+EXPECT HTTP:GET http://identity-service/validate
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+RETURNS {{payloads/identity_valid.json}}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  slug: ${SLUG}
+RETURNS EMPTY
+
+EXPECT_NOT WRITE:POSTGRESQL clicks
+EXPECT_NOT WRITE:POSTGRESQL links
+
+RESPOND HTTP:404

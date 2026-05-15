@@ -1,0 +1,27 @@
+TEST Create link - slug collision returns 409 without inserting
+
+VARS
+  AUTH_TOKEN: string length=32 charset=alphanumeric
+  USER_ID: string length=16 charset=alphanumeric
+  SLUG: string length=8 charset=alphanumeric
+  DESTINATION: string pattern=https://example.com/[a-z0-9]{16}
+
+RECEIVE HTTP:POST /links
+WITH {{payloads/create_link_request.json}}
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+  Content-Type: application/json
+
+EXPECT HTTP:GET http://identity-service/validate
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+RETURNS {{payloads/identity_valid.json}}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_WHERE_COLUMNS [slug]
+RETURNS {{payloads/slug_exists_row.yaml}}
+
+EXPECT_NOT WRITE:POSTGRESQL links
+
+RESPOND HTTP:409

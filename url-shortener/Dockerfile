@@ -1,8 +1,8 @@
 FROM golang:1.22-alpine AS builder
 WORKDIR /app
-COPY service/go.mod service/go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download
-COPY service/ ./
+COPY . ./
 RUN CGO_ENABLED=0 GOOS=linux go build -o /url-shortener .
 
 FROM alpine:3.19

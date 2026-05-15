@@ -1,0 +1,15 @@
+TEST Redirect - unknown slug returns 404
+
+VARS
+  SLUG: string length=8 charset=alphanumeric
+
+RECEIVE HTTP:GET /${SLUG}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  slug: ${SLUG}
+RETURNS EMPTY
+
+RESPOND HTTP:404
