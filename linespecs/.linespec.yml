@@ -1,0 +1,42 @@
+service:
+  name: url-shortener
+  service_dir: ..
+  type: web
+  framework: custom
+  port: 8080
+  health_endpoint: /health
+  docker_compose: ../docker-compose.yml
+  start_command: ""
+  migration_command: ""
+  warmup_endpoint: /health
+  warmup_delay_ms: 500
+  environment:
+    DB_HOST: db
+    DB_PORT: "5432"
+    DB_USER: urlshortener
+    DB_PASSWORD: urlshortener
+    DB_NAME: urlshortener
+    IDENTITY_SERVICE_URL: http://identity-service.local
+
+infrastructure:
+  database: true
+  kafka: false
+  redis: false
+  grpc: false
+
+database:
+  type: postgresql
+  image: postgres:16-alpine
+  port: 5432
+  container: db
+  database: urlshortener
+  username: urlshortener
+  password: urlshortener
+  init_script: ../init.sql
+
+dependencies:
+  - name: identity-service
+    type: http
+    host: identity-service.local
+    port: 80
+    proxy: true

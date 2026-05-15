@@ -21,7 +21,6 @@ constraints:
 affected_scope:
   - service/handlers/links.go
   - service/db/links.go
-  - service/middleware/auth.go
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a

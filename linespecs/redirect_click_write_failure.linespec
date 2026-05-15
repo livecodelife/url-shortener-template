@@ -1,0 +1,23 @@
+TEST Redirect - click write failure still returns 301, not 500
+
+VARS
+  SLUG: string length=8 charset=alphanumeric
+  DESTINATION: string length=32 charset=alphanumeric
+
+RECEIVE HTTP:GET /${SLUG}
+
+EXPECT READ:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  slug: ${SLUG}
+RETURNS {{payloads/link_row.yaml}}
+
+EXPECT WRITE:POSTGRESQL
+ACCESSING_TABLES [clicks]
+VERIFY_OPERATION INSERT
+RETURNS ERROR
+
+RESPOND HTTP:301
+HEADERS
+  Location: ${DESTINATION}

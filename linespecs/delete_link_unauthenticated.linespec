@@ -1,0 +1,12 @@
+TEST Delete link - unauthenticated request returns 401 without touching the database
+
+VARS
+  SLUG: string length=8 charset=alphanumeric
+
+RECEIVE HTTP:DELETE /links/${SLUG}
+
+EXPECT_NOT READ:POSTGRESQL links
+EXPECT_NOT WRITE:POSTGRESQL links
+EXPECT_NOT WRITE:POSTGRESQL clicks
+
+RESPOND HTTP:401

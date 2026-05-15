@@ -1,0 +1,27 @@
+service:
+    name: url-shortener-template
+    service_dir: ""
+    type: web
+    framework: ""
+    port: 0
+    health_endpoint: /
+    docker_compose: docker-compose.yml
+    build_context: ""
+    start_command: ""
+    migration_command: ""
+    warmup_endpoint: ""
+    warmup_delay_ms: 0
+    environment: {}
+infrastructure:
+    kafka: false
+    database: false
+    redis: false
+    grpc: false
+    external_db: false
+    proxy_image: ""
+provenance:
+    enforcement: strict
+    dir: provenance
+    commit_tag_required: true
+    auto_affected_scope: false
+    run_associated_specs_on_complete: true

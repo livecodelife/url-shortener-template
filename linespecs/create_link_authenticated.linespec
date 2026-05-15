@@ -1,0 +1,44 @@
+TEST Create link - authenticated returns 201 with created_by populated from token identity
+
+VARS
+  AUTH_TOKEN: string length=32 charset=alphanumeric
+  USER_ID: string length=16 charset=alphanumeric
+  SLUG: string length=8 charset=alphanumeric
+  DESTINATION: string length=32 charset=alphanumeric
+
+RECEIVE HTTP:POST /links
+WITH {{payloads/create_link_request.json}}
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+  Content-Type: application/json
+
+EXPECT HTTP:GET http://identity-service.local/validate
+HEADERS
+  Authorization: Bearer ${AUTH_TOKEN}
+RETURNS {{payloads/identity_valid.json}}
+
+EXPECT READ:POSTGRESQL CALL 1
+ACCESSING_TABLES [links]
+VERIFY_WHERE_COLUMNS [slug]
+RETURNS {{payloads/count_zero.yaml}}
+
+EXPECT WRITE:POSTGRESQL
+ACCESSING_TABLES [links]
+VERIFY_OPERATION INSERT
+VERIFY_WRITTEN_VALUES
+  slug: ${SLUG}
+  destination: ${DESTINATION}
+  created_by: ${USER_ID}
+WITH {{payloads/write_result.yaml}}
+
+EXPECT READ:POSTGRESQL CALL 2
+ACCESSING_TABLES [links]
+VERIFY_OPERATION SELECT
+VERIFY_WHERE
+  slug: ${SLUG}
+RETURNS {{payloads/link_row.yaml}}
+
+RESPOND HTTP:201
+WITH {{payloads/link_response.json}}
+NOISE
+  body.created_at

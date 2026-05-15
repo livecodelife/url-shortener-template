@@ -1,0 +1,15 @@
+- slug: ${SLUG}
+  clicked_at: "2026-05-15T12:00:00Z"
+  user_agent: "Mozilla/5.0"
+  referer: null
+  ip_address: "1.2.3.4"
+- slug: ${SLUG}
+  clicked_at: "2026-05-15T11:00:00Z"
+  user_agent: "curl/7.0"
+  referer: null
+  ip_address: "5.6.7.8"
+- slug: ${SLUG}
+  clicked_at: "2026-05-14T10:00:00Z"
+  user_agent: null
+  referer: null
+  ip_address: null
