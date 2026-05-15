@@ -1,0 +1,30 @@
+id: prov-2026-21ed8b8b
+title: Redirect Behavior and Async Click Recording
+status: draft
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  Slugs resolve to destination URLs and return a permanent redirect. Click recording is
+  decoupled from the redirect response path via goroutine fire-and-forget. The redirect
+  must succeed even if analytics infrastructure is degraded.
+constraints:
+  - MUST return 301 with a correct Location header for known slugs
+  - MUST return 404 for unknown slugs
+  - MUST NOT block the redirect response on click write completion
+  - MUST record a click attempt regardless of whether the write succeeds
+  - MUST return 404, not 500, if the click write fails
+  - Click recording uses a goroutine dispatched after the response is written
+affected_scope:
+  - service/handlers/redirect.go
+  - service/db/clicks.go
+forbidden_scope: []
+type: blueprint
+implements: prov-2026-eff2677a
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

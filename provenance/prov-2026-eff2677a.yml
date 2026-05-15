@@ -1,0 +1,26 @@
+id: prov-2026-eff2677a
+title: Self-Hosted Link Management Service
+status: draft
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  Engineers and developers need a simple, self-hosted alternative to commercial link shorteners.
+  The system must be fast on the redirect path and must not compromise redirect reliability for
+  the sake of analytics. Authenticated users manage their own links; the redirect path is
+  unauthenticated and optimized for speed.
+constraints:
+  - All redirect responses must be returned before click recording completes
+  - Analytics must never block or delay a redirect response
+  - Token validation is delegated entirely to an external identity service
+  - Ownership is enforced at the API layer — users cannot view or modify links they do not own
+affected_scope: []
+forbidden_scope: []
+type: brief
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

@@ -1,0 +1,28 @@
+id: prov-2026-2b9688b2
+title: Click Analytics Reporting
+status: draft
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  Link owners can retrieve aggregate and recent click data for their links. Analytics data
+  is derived from the clicks table and scoped to the requesting user's links.
+constraints:
+  - MUST enforce ownership before returning analytics data
+  - MUST return total click count, clicks in the last 24 hours, and the 10 most recent click records
+  - MUST order recent clicks by clicked_at descending
+  - MUST return 403 when a user attempts to view analytics for a link they do not own
+  - MUST return 404 if the slug does not exist
+affected_scope:
+  - service/handlers/analytics.go
+  - service/db/clicks.go
+forbidden_scope: []
+type: blueprint
+implements: prov-2026-eff2677a
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

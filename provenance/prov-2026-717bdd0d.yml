@@ -1,0 +1,29 @@
+id: prov-2026-717bdd0d
+title: Identity Service Token Validation
+status: draft
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  Token validation is delegated entirely to an external identity service. This service is
+  the sole authority on token validity. The API must not implement fallback authentication
+  or cache validation results.
+constraints:
+  - MUST call the identity service synchronously on every authenticated request
+  - MUST NOT cache token validation results between requests
+  - MUST return 503, not a default authenticated state, when the identity service is unreachable
+  - MUST return 401 when the identity service returns an invalid or expired token response
+  - Token validation MUST occur before any database read or write on authenticated endpoints
+affected_scope:
+  - service/middleware/auth.go
+  - service/auth/identity.go
+forbidden_scope: []
+type: blueprint
+implements: prov-2026-eff2677a
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []

@@ -1,0 +1,35 @@
+id: prov-2026-35a431d0
+title: Link Lifecycle Management
+status: draft
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  Authenticated users can create, list, and delete their own links. Ownership is enforced
+  at the API layer — users cannot view or modify links they do not own. Slug generation
+  is random when not provided and guaranteed collision-free.
+constraints:
+  - MUST validate bearer tokens against the identity service before any database operation
+  - MUST return 401 before touching the database when no valid token is present
+  - MUST return 503 if the identity service is unreachable
+  - MUST populate created_by from the verified token identity, not from request input
+  - MUST return 409 on slug collision
+  - MUST generate a unique random slug when none is provided
+  - MUST return 403 when a user attempts to delete a link they do not own
+  - MUST delete associated click records in the same transaction as the link
+  - Partial deletion (link deleted without clicks, or vice versa) MUST NOT occur
+  - MUST return only the requesting user's links in list responses
+affected_scope:
+  - service/handlers/links.go
+  - service/db/links.go
+  - service/middleware/auth.go
+forbidden_scope: []
+type: blueprint
+implements: prov-2026-eff2677a
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs: []
+associated_traces: []
+monitors: []
+tags: []
