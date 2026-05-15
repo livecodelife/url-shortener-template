@@ -1,0 +1,15 @@
+{
+  "latest": "v1",
+  "versions": {
+    "v1": {
+      "created_at": "2026-05-15T23:28:17Z",
+      "root_hash": "a6f96cf62d286589f03f271b54e874ec5e1776a8ba7d1d262d62cff9701745d8",
+      "layers": {
+        "provenance": {
+          "sha256": "3a4391e978828e010c11955ec498482e1bc6633c77434b55991e45b967872359",
+          "url": ""
+        }
+      }
+    }
+  }
+}
