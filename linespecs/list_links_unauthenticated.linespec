@@ -1,7 +1,0 @@
-TEST List links - unauthenticated request returns 401 without touching the database
-
-RECEIVE HTTP:GET /links
-
-EXPECT_NOT READ:POSTGRESQL links
-
-RESPOND HTTP:401
