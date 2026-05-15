@@ -1,0 +1,30 @@
+id: prov-2026-b2b5c4ca
+title: Publish provenance manifest and finalize prompt.md
+status: open
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  Publish the provenance manifest via `linespec provenance publish`, producing
+  linespec.manifest.json and linespec-provenance-v1.tar at the repo root.
+  Upload the tar as a GitHub release asset and update the manifest url field
+  with the release download URL. Also finalizes prompt.md with the third
+  paragraph added by the user.
+constraints: []
+affected_scope:
+  - linespec.manifest.json
+  - prompt.md
+  - .linespec/**
+  - provenance/**
+forbidden_scope: []
+type: imprint
+implements: prov-2026-34380153
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs:
+  - path: linespecs/identity/validate_valid_token.linespec
+    type: linespec
+associated_traces: []
+monitors: []
+tags: []
