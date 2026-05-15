@@ -29,27 +29,27 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: url-shortener/linespecs/create_link_authenticated.linespec
+  - path: linespecs/url-shortener/create_link_authenticated.linespec
     type: linespec
-  - path: url-shortener/linespecs/create_link_unauthenticated.linespec
+  - path: linespecs/url-shortener/create_link_unauthenticated.linespec
     type: linespec
-  - path: url-shortener/linespecs/create_link_identity_down.linespec
+  - path: linespecs/url-shortener/create_link_identity_down.linespec
     type: linespec
-  - path: url-shortener/linespecs/create_link_slug_collision.linespec
+  - path: linespecs/url-shortener/create_link_slug_collision.linespec
     type: linespec
-  - path: url-shortener/linespecs/create_link_no_slug.linespec
+  - path: linespecs/url-shortener/create_link_no_slug.linespec
     type: linespec
-  - path: url-shortener/linespecs/delete_link_owner.linespec
+  - path: linespecs/url-shortener/delete_link_owner.linespec
     type: linespec
-  - path: url-shortener/linespecs/delete_link_non_owner.linespec
+  - path: linespecs/url-shortener/delete_link_non_owner.linespec
     type: linespec
-  - path: url-shortener/linespecs/delete_link_unknown.linespec
+  - path: linespecs/url-shortener/delete_link_unknown.linespec
     type: linespec
-  - path: url-shortener/linespecs/delete_link_unauthenticated.linespec
+  - path: linespecs/url-shortener/delete_link_unauthenticated.linespec
     type: linespec
-  - path: url-shortener/linespecs/list_links_authenticated.linespec
+  - path: linespecs/url-shortener/list_links_authenticated.linespec
     type: linespec
-  - path: url-shortener/linespecs/list_links_unauthenticated.linespec
+  - path: linespecs/url-shortener/list_links_unauthenticated.linespec
     type: linespec
 associated_traces: []
 monitors: []

@@ -25,13 +25,13 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: url-shortener/linespecs/redirect_known_slug.linespec
+  - path: linespecs/url-shortener/redirect_known_slug.linespec
     type: linespec
-  - path: url-shortener/linespecs/redirect_unknown_slug.linespec
+  - path: linespecs/url-shortener/redirect_unknown_slug.linespec
     type: linespec
-  - path: url-shortener/linespecs/redirect_click_async.linespec
+  - path: linespecs/url-shortener/redirect_click_async.linespec
     type: linespec
-  - path: url-shortener/linespecs/redirect_click_write_failure.linespec
+  - path: linespecs/url-shortener/redirect_click_write_failure.linespec
     type: linespec
 associated_traces: []
 monitors: []

@@ -1,7 +1,7 @@
 service:
   name: url-shortener
-  service_dir: ..
-  build_context: ..
+  service_dir: ../../url-shortener
+  build_context: ../../url-shortener
   type: web
   framework: chi
   port: 8080
@@ -34,7 +34,7 @@ database:
   database: urlshortener
   username: urlshortener
   password: urlshortener
-  init_script: ../init.sql
+  init_script: ../../url-shortener/init.sql
 
 dependencies:
   - name: identity-service

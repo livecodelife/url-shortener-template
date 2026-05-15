@@ -22,11 +22,11 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: url-shortener/linespecs/analytics_owner.linespec
+  - path: linespecs/url-shortener/analytics_owner.linespec
     type: linespec
-  - path: url-shortener/linespecs/analytics_non_owner.linespec
+  - path: linespecs/url-shortener/analytics_non_owner.linespec
     type: linespec
-  - path: url-shortener/linespecs/analytics_unauthenticated.linespec
+  - path: linespecs/url-shortener/analytics_unauthenticated.linespec
     type: linespec
 associated_traces: []
 monitors: []

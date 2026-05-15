@@ -27,17 +27,17 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: identity/linespecs/register_success.linespec
+  - path: linespecs/identity/register_success.linespec
     type: linespec
-  - path: identity/linespecs/register_duplicate_email.linespec
+  - path: linespecs/identity/register_duplicate_email.linespec
     type: linespec
-  - path: identity/linespecs/login_success.linespec
+  - path: linespecs/identity/login_success.linespec
     type: linespec
-  - path: identity/linespecs/login_invalid_credentials.linespec
+  - path: linespecs/identity/login_invalid_credentials.linespec
     type: linespec
-  - path: identity/linespecs/validate_valid_token.linespec
+  - path: linespecs/identity/validate_valid_token.linespec
     type: linespec
-  - path: identity/linespecs/validate_invalid_token.linespec
+  - path: linespecs/identity/validate_invalid_token.linespec
     type: linespec
 associated_traces: []
 monitors: []

@@ -22,6 +22,7 @@ affected_scope:
   - provenance/**
   - linespecs/**
   - docker-compose.yml
+  - .linespec/**
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a
@@ -30,9 +31,9 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: url-shortener/linespecs/redirect_known_slug.linespec
+  - path: linespecs/url-shortener/redirect_known_slug.linespec
     type: linespec
-  - path: identity/linespecs/validate_valid_token.linespec
+  - path: linespecs/identity/validate_valid_token.linespec
     type: linespec
 associated_traces: []
 monitors: []
