@@ -23,6 +23,7 @@ affected_scope:
   - linespecs/**
   - docker-compose.yml
   - .linespec/**
+  - prompt.md
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a
