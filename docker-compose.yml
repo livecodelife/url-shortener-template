@@ -1,0 +1,59 @@
+services:
+  identity-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: identity
+      POSTGRES_PASSWORD: identity
+      POSTGRES_DB: identity
+    volumes:
+      - ./identity/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U identity"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+  identity:
+    build: ./identity
+    environment:
+      DB_HOST: identity-db
+      DB_PORT: "5432"
+      DB_USER: identity
+      DB_PASSWORD: identity
+      DB_NAME: identity
+    ports:
+      - "8081:8080"
+    depends_on:
+      identity-db:
+        condition: service_healthy
+
+  url-shortener-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: urlshortener
+      POSTGRES_PASSWORD: urlshortener
+      POSTGRES_DB: urlshortener
+    volumes:
+      - ./url-shortener/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U urlshortener"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+  url-shortener:
+    build: ./url-shortener
+    environment:
+      DB_HOST: url-shortener-db
+      DB_PORT: "5432"
+      DB_USER: urlshortener
+      DB_PASSWORD: urlshortener
+      DB_NAME: urlshortener
+      IDENTITY_SERVICE_URL: http://identity:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      url-shortener-db:
+        condition: service_healthy
+      identity:
+        condition: service_started
