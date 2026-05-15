@@ -20,6 +20,8 @@ affected_scope:
   - identity/**
   - go.work
   - provenance/**
+  - linespecs/**
+  - docker-compose.yml
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a
