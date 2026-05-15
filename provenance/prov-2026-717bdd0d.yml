@@ -1,6 +1,6 @@
 id: prov-2026-717bdd0d
 title: Identity Service Token Validation
-status: draft
+status: open
 created_at: "2026-05-15"
 author: calebcowen@gmail.com
 intent: >
@@ -23,7 +23,17 @@ supersedes: ""
 superseded_by: ""
 related: []
 sealed_at_sha: ""
-associated_specs: []
+associated_specs:
+  - path: linespecs/create_link_unauthenticated.linespec
+    type: linespec
+  - path: linespecs/create_link_identity_down.linespec
+    type: linespec
+  - path: linespecs/delete_link_unauthenticated.linespec
+    type: linespec
+  - path: linespecs/analytics_unauthenticated.linespec
+    type: linespec
+  - path: linespecs/list_links_unauthenticated.linespec
+    type: linespec
 associated_traces: []
 monitors: []
 tags: []

@@ -1,6 +1,6 @@
 id: prov-2026-2b9688b2
 title: Click Analytics Reporting
-status: draft
+status: open
 created_at: "2026-05-15"
 author: calebcowen@gmail.com
 intent: >
@@ -22,7 +22,13 @@ supersedes: ""
 superseded_by: ""
 related: []
 sealed_at_sha: ""
-associated_specs: []
+associated_specs:
+  - path: linespecs/analytics_owner.linespec
+    type: linespec
+  - path: linespecs/analytics_non_owner.linespec
+    type: linespec
+  - path: linespecs/analytics_unauthenticated.linespec
+    type: linespec
 associated_traces: []
 monitors: []
 tags: []
