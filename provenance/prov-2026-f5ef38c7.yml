@@ -1,0 +1,44 @@
+id: prov-2026-f5ef38c7
+title: Identity Service — User Registration and Token Management
+status: open
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  A self-contained identity service handles user registration and token-based
+  authentication. Users register with email and password; passwords are stored
+  as bcrypt hashes. Login verifies credentials and issues an opaque bearer token
+  stored in the tokens table. The url-shortener validates tokens by calling
+  GET /validate, which returns the user_id for valid tokens or 401 for invalid ones.
+constraints:
+  - MUST hash passwords with bcrypt before storing
+  - MUST return 409 on duplicate email registration
+  - MUST return 401 for invalid credentials on login
+  - MUST return 401 for invalid or unknown tokens on validate
+  - 'MUST return user_id in validate response body as {"user_id": "..."}'
+  - Token storage MUST use the tokens table; tokens are opaque random hex strings
+  - All DB reads MUST scan into nullable types (sql.NullString) for proxy compatibility
+affected_scope:
+  - identity/**
+forbidden_scope: []
+type: blueprint
+implements: prov-2026-eff2677a
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs:
+  - path: identity/linespecs/register_success.linespec
+    type: linespec
+  - path: identity/linespecs/register_duplicate_email.linespec
+    type: linespec
+  - path: identity/linespecs/login_success.linespec
+    type: linespec
+  - path: identity/linespecs/login_invalid_credentials.linespec
+    type: linespec
+  - path: identity/linespecs/validate_valid_token.linespec
+    type: linespec
+  - path: identity/linespecs/validate_invalid_token.linespec
+    type: linespec
+associated_traces: []
+monitors: []
+tags: []

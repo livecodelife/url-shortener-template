@@ -13,7 +13,7 @@ constraints:
   - MUST return 403 when a user attempts to view analytics for a link they do not own
   - MUST return 404 if the slug does not exist
 affected_scope:
-  - service/handlers/analytics.go
+  - url-shortener/handlers/analytics.go
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a
@@ -22,11 +22,11 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: linespecs/analytics_owner.linespec
+  - path: url-shortener/linespecs/analytics_owner.linespec
     type: linespec
-  - path: linespecs/analytics_non_owner.linespec
+  - path: url-shortener/linespecs/analytics_non_owner.linespec
     type: linespec
-  - path: linespecs/analytics_unauthenticated.linespec
+  - path: url-shortener/linespecs/analytics_unauthenticated.linespec
     type: linespec
 associated_traces: []
 monitors: []

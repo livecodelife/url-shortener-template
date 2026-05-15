@@ -6,7 +6,7 @@ author: calebcowen@gmail.com
 intent: "GetAnalytics uses COUNT(*)::text AS count instead of COUNT(*) for all aggregate queries. lib/pq requests binary format (int8, 8 bytes) for int8 columns via prepared statements, but the linespec proxy returns YAML strings (1 byte), causing a panic in binaryDecode. Casting to text forces lib/pq to request text format. The proxy extracts COUNT(*) (not the AS alias) as the column name from SQL text, so YAML keys must be 'COUNT(*)' not 'count'. Scan results are parsed with strconv.Atoi."
 constraints: []
 affected_scope:
-  - service/db/clicks.go
+  - url-shortener/db/clicks.go
 forbidden_scope: []
 type: imprint
 implements: prov-2026-2b9688b2

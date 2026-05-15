@@ -14,8 +14,8 @@ constraints:
   - MUST return 401 when the identity service returns an invalid or expired token response
   - Token validation MUST occur before any database read or write on authenticated endpoints
 affected_scope:
-  - service/middleware/auth.go
-  - service/auth/identity.go
+  - url-shortener/middleware/auth.go
+  - url-shortener/auth/identity.go
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a
@@ -24,15 +24,15 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: linespecs/create_link_unauthenticated.linespec
+  - path: url-shortener/linespecs/create_link_unauthenticated.linespec
     type: linespec
-  - path: linespecs/create_link_identity_down.linespec
+  - path: url-shortener/linespecs/create_link_identity_down.linespec
     type: linespec
-  - path: linespecs/delete_link_unauthenticated.linespec
+  - path: url-shortener/linespecs/delete_link_unauthenticated.linespec
     type: linespec
-  - path: linespecs/analytics_unauthenticated.linespec
+  - path: url-shortener/linespecs/analytics_unauthenticated.linespec
     type: linespec
-  - path: linespecs/list_links_unauthenticated.linespec
+  - path: url-shortener/linespecs/list_links_unauthenticated.linespec
     type: linespec
 associated_traces: []
 monitors: []

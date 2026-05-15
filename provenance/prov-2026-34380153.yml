@@ -1,0 +1,37 @@
+id: prov-2026-34380153
+title: Monorepo Restructure — Separate Service Directories
+status: open
+created_at: "2026-05-15"
+author: calebcowen@gmail.com
+intent: >
+  The repository is restructured as a monorepo containing both the url-shortener
+  and identity services. Each service lives in its own top-level directory with its
+  own Go module, Dockerfile, init.sql, and linespecs directory. A go.work file at
+  the repo root ties the modules together for local development. The root
+  .linespec.yml continues to govern provenance only.
+constraints:
+  - Each service MUST have its own linespecs directory with its own .linespec.yml
+  - Each service MUST have its own Go module (go.mod) and Dockerfile
+  - The root .linespec.yml MUST remain provenance-only
+  - A go.work file MUST exist at the repo root referencing both modules
+  - All provenance affected_scope paths MUST reflect the new directory layout
+affected_scope:
+  - url-shortener/**
+  - identity/**
+  - go.work
+  - provenance/**
+forbidden_scope: []
+type: blueprint
+implements: prov-2026-eff2677a
+supersedes: ""
+superseded_by: ""
+related: []
+sealed_at_sha: ""
+associated_specs:
+  - path: url-shortener/linespecs/redirect_known_slug.linespec
+    type: linespec
+  - path: identity/linespecs/validate_valid_token.linespec
+    type: linespec
+associated_traces: []
+monitors: []
+tags: []

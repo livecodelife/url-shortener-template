@@ -15,8 +15,8 @@ constraints:
   - MUST return 404, not 500, if the click write fails
   - Click recording uses a goroutine dispatched after the response is written
 affected_scope:
-  - service/handlers/redirect.go
-  - service/db/clicks.go
+  - url-shortener/handlers/redirect.go
+  - url-shortener/db/clicks.go
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a
@@ -25,13 +25,13 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: linespecs/redirect_known_slug.linespec
+  - path: url-shortener/linespecs/redirect_known_slug.linespec
     type: linespec
-  - path: linespecs/redirect_unknown_slug.linespec
+  - path: url-shortener/linespecs/redirect_unknown_slug.linespec
     type: linespec
-  - path: linespecs/redirect_click_async.linespec
+  - path: url-shortener/linespecs/redirect_click_async.linespec
     type: linespec
-  - path: linespecs/redirect_click_write_failure.linespec
+  - path: url-shortener/linespecs/redirect_click_write_failure.linespec
     type: linespec
 associated_traces: []
 monitors: []

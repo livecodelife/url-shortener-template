@@ -6,7 +6,7 @@ author: calebcowen@gmail.com
 intent: "GetLink scans into sql.NullString and sql.NullTime instead of string and time.Time directly. The linespec proxy sends a dummy NULL row (not sql.ErrNoRows) for RETURNS EMPTY expectations. Scanning NULL into non-nullable types causes a scan error propagating as 500 instead of 404. Using nullable scan targets and checking slugVal.Valid == false as the not-found condition handles both production ErrNoRows and the proxy dummy NULL row."
 constraints: []
 affected_scope:
-  - service/db/links.go
+  - url-shortener/db/links.go
 forbidden_scope: []
 type: imprint
 implements: prov-2026-35a431d0

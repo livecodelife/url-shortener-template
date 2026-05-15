@@ -19,8 +19,8 @@ constraints:
   - Partial deletion (link deleted without clicks, or vice versa) MUST NOT occur
   - MUST return only the requesting user's links in list responses
 affected_scope:
-  - service/handlers/links.go
-  - service/db/links.go
+  - url-shortener/handlers/links.go
+  - url-shortener/db/links.go
 forbidden_scope: []
 type: blueprint
 implements: prov-2026-eff2677a
@@ -29,27 +29,27 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: linespecs/create_link_authenticated.linespec
+  - path: url-shortener/linespecs/create_link_authenticated.linespec
     type: linespec
-  - path: linespecs/create_link_unauthenticated.linespec
+  - path: url-shortener/linespecs/create_link_unauthenticated.linespec
     type: linespec
-  - path: linespecs/create_link_identity_down.linespec
+  - path: url-shortener/linespecs/create_link_identity_down.linespec
     type: linespec
-  - path: linespecs/create_link_slug_collision.linespec
+  - path: url-shortener/linespecs/create_link_slug_collision.linespec
     type: linespec
-  - path: linespecs/create_link_no_slug.linespec
+  - path: url-shortener/linespecs/create_link_no_slug.linespec
     type: linespec
-  - path: linespecs/delete_link_owner.linespec
+  - path: url-shortener/linespecs/delete_link_owner.linespec
     type: linespec
-  - path: linespecs/delete_link_non_owner.linespec
+  - path: url-shortener/linespecs/delete_link_non_owner.linespec
     type: linespec
-  - path: linespecs/delete_link_unknown.linespec
+  - path: url-shortener/linespecs/delete_link_unknown.linespec
     type: linespec
-  - path: linespecs/delete_link_unauthenticated.linespec
+  - path: url-shortener/linespecs/delete_link_unauthenticated.linespec
     type: linespec
-  - path: linespecs/list_links_authenticated.linespec
+  - path: url-shortener/linespecs/list_links_authenticated.linespec
     type: linespec
-  - path: linespecs/list_links_unauthenticated.linespec
+  - path: url-shortener/linespecs/list_links_unauthenticated.linespec
     type: linespec
 associated_traces: []
 monitors: []

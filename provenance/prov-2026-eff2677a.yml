@@ -21,17 +21,17 @@ superseded_by: ""
 related: []
 sealed_at_sha: ""
 associated_specs:
-  - path: linespecs/redirect_known_slug.linespec
+  - path: url-shortener/linespecs/redirect_known_slug.linespec
     type: linespec
-  - path: linespecs/redirect_unknown_slug.linespec
+  - path: url-shortener/linespecs/redirect_unknown_slug.linespec
     type: linespec
-  - path: linespecs/create_link_authenticated.linespec
+  - path: url-shortener/linespecs/create_link_authenticated.linespec
     type: linespec
-  - path: linespecs/delete_link_owner.linespec
+  - path: url-shortener/linespecs/delete_link_owner.linespec
     type: linespec
-  - path: linespecs/analytics_owner.linespec
+  - path: url-shortener/linespecs/analytics_owner.linespec
     type: linespec
-  - path: linespecs/list_links_authenticated.linespec
+  - path: url-shortener/linespecs/list_links_authenticated.linespec
     type: linespec
 associated_traces: []
 monitors: []

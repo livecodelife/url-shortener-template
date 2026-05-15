@@ -6,7 +6,7 @@ author: calebcowen@gmail.com
 intent: "SlugExists queries SELECT slug FROM links WHERE slug = $1 LIMIT 1 instead of SELECT COUNT(*). lib/pq requests binary format (int8, 8 bytes) for COUNT(*) results via prepared statements, but the linespec proxy returns YAML string values (1 byte). Using a slug column (varchar/text) forces text format so the proxy's string values decode correctly. The result is scanned into sql.NullString to handle the proxy's dummy NULL row for RETURNS EMPTY without a scan error."
 constraints: []
 affected_scope:
-  - service/db/links.go
+  - url-shortener/db/links.go
 forbidden_scope: []
 type: imprint
 implements: prov-2026-35a431d0
