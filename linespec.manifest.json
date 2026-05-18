@@ -1,0 +1,24 @@
+{
+  "name": "url-shortener-template",
+  "latest": "v1",
+  "versions": {
+    "v1": {
+      "created_at": "2026-05-18T15:12:59Z",
+      "root_hash": "488b7e717183c35f9af88c9120e1850753cb55ba6224c93d375612ee34c2f854",
+      "layers": {
+        "prompt": {
+          "sha256": "05eaa484774306a122af7c934ca0cf4980b35854756c9acb77cdc27497d912bf",
+          "url": "https://github.com/livecodelife/url-shortener-template/releases/download/manifest-v1/linespec-prompt-v1.tar"
+        },
+        "provenance": {
+          "sha256": "3a4391e978828e010c11955ec498482e1bc6633c77434b55991e45b967872359",
+          "url": "https://github.com/livecodelife/url-shortener-template/releases/download/manifest-v1/linespec-provenance-v1.tar"
+        },
+        "specs": {
+          "sha256": "a836bd09d4bd3e7a8e8172704e0f44ff072ca2ba1d96924dcf27d1ab18609c72",
+          "url": "https://github.com/livecodelife/url-shortener-template/releases/download/manifest-v1/linespec-specs-v1.tar"
+        }
+      }
+    }
+  }
+}
